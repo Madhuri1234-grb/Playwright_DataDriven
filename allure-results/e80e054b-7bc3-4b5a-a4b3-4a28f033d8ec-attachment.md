@@ -1,0 +1,195 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: ERPsingledata.spec.ts >> ERP Inventroy Management >> Supplier With Single data
+- Location: tests\ERPsingledata.spec.ts:6:9
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: locator('#tbl_a_supplierslist tbody tr')
+Expected: visible
+Error: strict mode violation: locator('#tbl_a_supplierslist tbody tr') resolved to 10 elements:
+    1) <tr data-rowtype="1" data-rowindex="1" class="ewTableRow" id="r1_a_suppliers">…</tr> aka getByRole('row', { name: ' Purchase Now    Purchases  3 Stock Items  2 Supplier-00000000001 First' })
+    2) <tr data-rowtype="1" data-rowindex="2" id="r2_a_suppliers" class="ewTableAltRow">…</tr> aka getByRole('row', { name: ' Purchase Now    Purchases  2 Stock Items  4 Supplier-00000000002 Second' })
+    3) <tr data-rowtype="1" data-rowindex="3" class="ewTableRow" id="r3_a_suppliers">…</tr> aka getByRole('row', { name: ' Purchase Now    Purchases  1 Stock Items  3 Supplier-00000000003 Third' })
+    4) <tr data-rowtype="1" data-rowindex="4" id="r4_a_suppliers" class="ewTableAltRow">…</tr> aka getByRole('row', { name: ' Purchase Now    Purchases  1 Stock Items  1 Supplier-00000000004 Fourth' })
+    5) <tr data-rowtype="1" data-rowindex="5" class="ewTableRow" id="r5_a_suppliers">…</tr> aka getByRole('row', { name: ' Purchase Now    Purchases Stock Items Supplier-00000000005 bbcfgb bcv bcv' })
+    6) <tr data-rowtype="1" data-rowindex="6" id="r6_a_suppliers" class="ewTableAltRow">…</tr> aka getByRole('row', { name: ' Purchase Now    Purchases Stock Items Supplier-00000000006 hfghgf hgf hgf' })
+    7) <tr data-rowtype="1" data-rowindex="7" class="ewTableRow" id="r7_a_suppliers">…</tr> aka getByRole('row', { name: ' Purchase Now    Purchases Stock Items Supplier-00000000007 bb vxc vxc vxc' })
+    8) <tr data-rowtype="1" data-rowindex="8" id="r8_a_suppliers" class="ewTableAltRow">…</tr> aka getByRole('row', { name: ' Purchase Now    Purchases  1 Stock Items Supplier-00000000008 John Qedge' })
+    9) <tr data-rowtype="1" data-rowindex="9" class="ewTableRow" id="r9_a_suppliers">…</tr> aka getByRole('row', { name: ' Purchase Now    Purchases Stock Items Supplier-00000000009 John Qedge' })
+    10) <tr data-rowtype="1" data-rowindex="10" id="r10_a_suppliers" class="ewTableAltRow">…</tr> aka getByRole('row', { name: ' Purchase Now    Purchases Stock Items Supplier-00000000010 John Qedge' })
+
+Call log:
+  - Expect "toBeVisible" locator('#tbl_a_supplierslist tbody tr') with timeout 5000ms
+  - waiting for locator('#tbl_a_supplierslist tbody tr')
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=f6e2]:
+  - generic [ref=f6e3]:
+    - link "Stock Accounting" [ref=f6e6] [cursor=pointer]:
+      - /url: .
+    - strong [ref=f6e9]: Stock Accounting
+  - text:       
+  - generic [ref=f6e13]:
+    - list [ref=f6e14]:
+      - listitem [ref=f6e15]:
+        - link " Help (Categories)" [ref=f6e16] [cursor=pointer]:
+          - /url: help_categorieslist.php
+          - generic [ref=f6e17]: 
+          - text: Help (Categories)
+        - text:   
+      - listitem [ref=f6e19]:
+        - link " Login" [ref=f6e20] [cursor=pointer]:
+          - /url: login.php
+          - generic [ref=f6e21]: 
+          - text: Login
+    - list
+  - generic [ref=f6e24]:
+    - generic [ref=f6e27]:
+      - generic [ref=f6e28] [cursor=pointer]:
+        - radio "en" [checked]
+        - text: en
+      - generic [ref=f6e29] [cursor=pointer]:
+        - radio "id"
+        - text: id
+    - generic:  
+  - generic [ref=f6e32]:
+    - text: ©2015
+    - link "Masino Sinaga" [ref=f6e33] [cursor=pointer]:
+      - /url: http://www.ilovephpmaker.com
+    - text: . All rights reserved. |
+    - link "Terms and Conditions" [ref=f6e34] [cursor=pointer]:
+      - /url: javascript:void(0);
+    - text: "|"
+    - link "About Us" [ref=f6e35] [cursor=pointer]:
+      - /url: javascript:void(0);
+    - text: "|"
+    - link "Back to Top" [ref=f6e36] [cursor=pointer]:
+      - /url: javascript:void(0);
+```
+
+# Test source
+
+```ts
+  1   | import { expect, Locator, Page } from "@playwright/test";
+  2   | 
+  3   | export class SuppliersPage {
+  4   |     page: Page
+  5   |     readonly ClickSuppliersLink: Locator
+  6   |     readonly ClickAddIconButton: Locator
+  7   |     readonly SupplierNumber: Locator
+  8   |     readonly SupplierName: Locator
+  9   |     readonly Address: Locator
+  10  |     readonly City: Locator
+  11  |     readonly Country: Locator
+  12  |     readonly ContactPerson: Locator
+  13  |     readonly PhoneNumber: Locator
+  14  |     readonly Email: Locator
+  15  |     readonly MobileNumber: Locator
+  16  |     readonly Notes: Locator
+  17  |     readonly ClickAddButton: Locator
+  18  |     readonly ClickConfirmOk: Locator
+  19  |     readonly ClickAlertOk: Locator
+  20  |     readonly SearchPanel: Locator
+  21  |     readonly Searchtextbox: Locator
+  22  |     readonly SearchButton: Locator
+  23  |     //readonly SupplierGrid: Locator
+  24  |     private expNumber: string
+  25  | 
+  26  |     //Constructor to initialize the values to properties
+  27  |     constructor(page: Page) {
+  28  |         this.page = page
+  29  |         this.ClickSuppliersLink = page.locator('#mi_a_suppliers')
+  30  |         this.ClickAddIconButton = page.locator('[data-caption="Add"]').first()
+  31  |         this.SupplierNumber = page.getByPlaceholder('Supplier Name')
+  32  |         this.SupplierName = page.getByPlaceholder('Supplier Name')
+  33  |         this.Address = page.getByPlaceholder('Address')
+  34  |         this.City = page.getByPlaceholder('City')
+  35  |         this.Country = page.getByPlaceholder('Country')
+  36  |         this.ContactPerson = page.getByPlaceholder('Contact Person')
+  37  |         this.PhoneNumber = page.getByPlaceholder('Phone Number')
+  38  |         this.Email = page.getByPlaceholder('Email')
+  39  |         this.MobileNumber = page.getByPlaceholder('Mobile Number')
+  40  |         this.Notes = page.getByPlaceholder('Notes')
+  41  |         this.ClickAddButton = page.locator('button#btnAction')
+  42  |         this.ClickConfirmOk = page.getByRole('button', { name: 'OK!' })
+  43  |         this.ClickAlertOk = page.locator('.ajs-button.btn.btn-primary')
+  44  |         this.SearchPanel = page.locator('button[data-caption="Search Panel"]')
+  45  |         this.Searchtextbox = page.locator('input#psearch')
+  46  |         this.SearchButton = page.locator('button#btnsubmit')
+  47  | 
+  48  | 
+  49  |     }
+  50  |     //Method creation
+  51  |     async NavigateToSupplier() {
+  52  |         await this.ClickSuppliersLink.waitFor()
+  53  |         await this.ClickSuppliersLink.click()
+  54  |         await this.ClickAddIconButton.waitFor()
+  55  |         await this.ClickAddIconButton.click()
+  56  | 
+  57  | 
+  58  | 
+  59  |     }
+  60  | 
+  61  |     //Method creation for filling supplier data
+  62  |     async AddSupplierDetails(sname: string, Address: string, city: string, country: string,
+  63  |         cperson: string, phone: string, Email: string, mobile: string, notes: string) {
+  64  |         await expect(this.SupplierNumber).toBeVisible()
+  65  |         this.expNumber = await this.SupplierNumber.inputValue()
+  66  |         await this.SupplierName.fill(sname)
+  67  |         await this.Address.fill(Address)
+  68  |         await this.City.fill(city)
+  69  |         await this.Country.fill(country)
+  70  |         await this.ContactPerson.fill(cperson)
+  71  |         await this.PhoneNumber.fill(phone)
+  72  |         await this.Email.fill(Email)
+  73  |         await this.MobileNumber.fill(mobile)
+  74  |         await this.Notes.fill(notes)
+  75  |         await this.ClickAddButton.click()
+  76  | 
+  77  | 
+  78  | 
+  79  |     }
+  80  |     //Method for Alerts
+  81  |     async alerthandle() {
+  82  |         //await this.ClickAddButton.click()
+  83  |         await this.ClickConfirmOk.waitFor()
+  84  |         await this.ClickConfirmOk.click()
+  85  |         await this.ClickAlertOk.waitFor()
+  86  |         await this.ClickAlertOk.click()
+  87  |     }
+  88  | 
+  89  |     //Method for search suppliernumber
+  90  |     async suppliertable() {
+  91  |         if (!await this.Searchtextbox.isVisible()) {
+  92  |             await this.SearchPanel.click()
+  93  |         }
+  94  |         await this.Searchtextbox.fill(this.expNumber)
+  95  |         await this.SearchButton.click()
+  96  | 
+  97  |         const supplierRow = this.page.locator('#tbl_a_supplierslist tbody tr',
+  98  |             {
+  99  |                 hasText: this.expNumber
+  100 |             })
+> 101 |         await expect(supplierRow).toBeVisible()
+      |                                   ^ Error: expect(locator).toBeVisible() failed
+  102 |         console.log(`Supplier number found in the table ${this.expNumber}`)
+  103 |         await expect(supplierRow).toContainText(this.expNumber)
+  104 | 
+  105 |     }
+  106 | 
+  107 | } 
+```

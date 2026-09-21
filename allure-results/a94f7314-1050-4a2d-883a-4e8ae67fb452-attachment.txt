@@ -1,0 +1,5 @@
+SupplierNumber inputValue = 
+SupplierNumber value attribute = 
+SupplierNumber textContent = 
+SupplierNumber outerHTML = <input type="text" data-table="a_suppliers" data-field="x_Supplier_Name" name="x_Supplier_Name" id="x_Supplier_Name" size="30" maxlength="50" placeholder="Supplier Name" value="" class="form-control">
+EXP NUMBER = undefined

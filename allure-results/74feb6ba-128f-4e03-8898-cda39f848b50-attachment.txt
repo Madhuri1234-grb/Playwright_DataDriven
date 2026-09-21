@@ -1,0 +1,4 @@
+Generated Supplier Number: 
+EXP NUMBER = 
+Search textbox value = 
+Matching rows = 10

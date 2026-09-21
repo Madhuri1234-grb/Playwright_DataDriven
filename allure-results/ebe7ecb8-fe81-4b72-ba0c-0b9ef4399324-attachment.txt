@@ -1,0 +1,6 @@
+========== BEFORE EACH START ==========
+AdminLoginPage created
+launchUrl completed
+ERPLogin completed
+========== BEFORE EACH END ==========
+Customer number found in the table Customer-00000000703

@@ -1,0 +1,60 @@
+import { test } from '../hooks/ERPHooks'
+import { SuppliersPage } from '../Pages/SuppliersPage'
+import { CustomersPage } from '../Pages/CustomersPage'
+import { ExcelFileUtil } from '../Utils/ExcelFileUtil'
+import path from 'path'
+let supSheet: any
+let cusSheet: any
+//read path of excel 
+const Excelpath = path.join(__dirname, '../TestData/SupCustestdata.xlsx')
+try {
+    supSheet = ExcelFileUtil.getCelldata(Excelpath, 'suppliers')
+    cusSheet = ExcelFileUtil.getCelldata(Excelpath, 'customer')
+} catch (error) {
+    console.log(error)
+}
+// console.log(supSheet)
+// console.log(cusSheet)
+test.describe('ERp Management Module', () => {
+    for (const supdata of supSheet) {
+        test(`Supplier With Excel data ${supdata.suppliername}`, async ({ page }) => {
+            const sup = new SuppliersPage(page)
+            await sup.NavigateToSupplier()
+            await sup.AddSupplierDetails(
+                supdata.suppliername,
+                supdata.Address,
+                supdata.City,
+                supdata.Country,
+                supdata.Contactperson,
+                supdata.phoneNumber,
+                supdata.Email,
+                supdata.MobileNumber,
+                supdata.Notes
+
+            )
+            await sup.alerthandle()
+            await sup.suppliertable()
+        })
+    }
+    for (const cusdata of cusSheet) {
+        test(`Customer data using Excel ${cusdata.City}`, async ({ page }) => {
+            const cus = new CustomersPage(page)
+            await cus.NavigateToCustomer()
+            await cus.AddCustomerDetails(
+                cusdata.customername,
+                cusdata.Address,
+                cusdata.City,
+                cusdata.Country,
+                cusdata.contactPerson,
+                cusdata.PhoneNumber,
+                cusdata.Email,
+                cusdata.MobileNumber,
+                cusdata.Notes
+            )
+            await cus.alerthandle()
+            await cus.customertable()
+
+        })
+
+    }
+})

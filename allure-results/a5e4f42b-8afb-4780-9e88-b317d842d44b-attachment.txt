@@ -1,0 +1,10 @@
+========== BEFORE EACH START ==========
+AdminLoginPage created
+launchUrl completed
+ERPLogin completed
+========== BEFORE EACH END ==========
+Generated Supplier Number: Supplier-00000000986
+EXP NUMBER = Supplier-00000000986
+Search textbox value = Supplier-00000000986
+Matching rows = 1
+Supplier number found in the table Supplier-00000000986

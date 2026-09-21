@@ -1,0 +1,5 @@
+Generated Supplier Number: Supplier-00000000946
+EXP NUMBER = Supplier-00000000946
+Search textbox value = Supplier-00000000946
+Matching rows = 1
+Supplier number found in the table Supplier-00000000946
